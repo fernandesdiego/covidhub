@@ -1,0 +1,85 @@
+﻿@model ArticleCollection
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="carousel" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        @foreach (var item in Model.TopRanked)
+        {            
+                <div class="carousel-item">
+                    <a target="_blank" class="text-reset" href="@item.Link">
+                        <img class="img-fluid" src="@item.Cover">
+                    </a>
+                    <div class="carousel-caption">
+                        <div class="d-flex w-100 justify-content-between">
+                            <a target="_blank" class="text-reset" href="@item.Link">
+                                <h4 class="mb-1">@item.Title</h4>
+                            </a>
+                            <small>@item.PublishedDateNormalized</small>                            
+                        </div>                        
+                        <p class="summary">@item.Summary</p>
+                    </div>
+                </div>
+        }            
+    </div><!-- End Carousel Inner -->
+
+    <ul class="list-group col-sm-4">
+        @for (int i = 0; i < Model.TopRanked.Count; i++)
+        {
+            <li data-target="#carousel" data-slide-to="@i" class="list-group-item carousel-side"><p>@Model.TopRanked[i].Title</p></li>            
+        }
+    </ul>
+
+      <!-- Controls -->
+    <div class="carousel-controls">
+        <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div><!-- End Carousel -->
+    <br>
+    <div class="row">
+        <div class="col-md-8">
+            <h5>Mais relevantes</h5>
+            <ul class="list-group list-group-flush">  
+                    @foreach (var item in @Model.Relevant)
+                    {
+                        <li class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <a target="_blank" href="@item.Link">                            
+                                    <h5 class="mb-1">@item.Title</h5>
+                                </a>
+                                <small>@item.PublishedDateNormalized</small>                            
+                            </div>
+                            <p class="mb-1 summary">@item.Summary <a target="_blank" href="@item.Link">Continuar Lendo...</a></p>
+                            <small class="text-truncate">By @item.CleanURL</small>
+                        </li>
+                    }
+            </ul>
+        </div>
+        <div class="col-md-4 border-left">
+            <h5>Noticias recentes</h5>
+
+            @foreach (var item in @Model.Recent)
+            {                
+                <div class="card">
+                    <a target="_blank" href="@item.Link"><img src="@item.Media" class="card-img-top"></a>
+                    <div class="card-body">
+                    <h5 class="card-title"><a target="_blank" class="text-reset" href="@item.Link">@item.Title</a></h5>                    
+                    <small>@item.PublishedDateNormalized</small>
+                    </div>                    
+                </div>
+            }
+</div>
+
+
+        </div>
+    </div>
