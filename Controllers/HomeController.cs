@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using HNEWS.Models;
 using HNEWS.Data;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
 namespace HNEWS.Controllers
 {
@@ -15,15 +16,21 @@ namespace HNEWS.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private IArticleRepository _articleRepository;
+
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
             _articleRepository = new ArticleRepository();
         }
-        // q=covid&lang=pt&media=True
+
+        public string CurrentLanguage(HttpContext httpContext)
+        {
+            return httpContext.Request.Cookies["language"];
+        }
         public async Task<IActionResult> Index()
         {            
-            var article = await _articleRepository.GetArticleAsync();
+            var article = await _articleRepository.GetArticleAsync(CurrentLanguage(HttpContext));
             return View(article);
         }        
 

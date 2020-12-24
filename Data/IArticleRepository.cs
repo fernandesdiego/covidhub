@@ -6,10 +6,10 @@ namespace HNEWS.Data
 {
     public interface IArticleRepository
     {
-        Task<ArticleCollection> GetArticleAsync();
-        Task<IList<Article>> GetTopRanked();        
-        Task<IList<Article>> GetRecent();
-        Task<IList<Article>> GetRelevant();
+        Task<ArticleCollection> GetArticleAsync(string lang);
+        Task<IList<Article>> GetTopRanked(string lang);        
+        Task<IList<Article>> GetRecent(string lang);
+        Task<IList<Article>> GetRelevant(string lang);
         
             
     }
