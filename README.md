@@ -1,6 +1,7 @@
 News page powered by newscatcherapi.com
 
-Brings up the most recent, most relevant and top ranked news. 
+Brings up the most recent, most relevant and top ranked news on your current language. 
 
-Currently only for portuguese language, you can change it on *ArticleRepository.cs* class
++Update: added option to select your preferred language.
+
 ![View](covidhub.png)
